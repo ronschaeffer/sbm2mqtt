@@ -1,6 +1,8 @@
 # sbm2mqtt
 
-Grab SwitchBot Meter data over BLE and publish to MQTT topic
+CODE COMING SOON
+
+Grab SwitchBot Meter data over BLE and publish to MQTT topic.
 
 - Based in part on [OpenWonderLabs/python-host](https://github.com/OpenWonderLabs/python-host) and [Switchbot_Py_Meter](https://github.com/bbostock/Switchbot_Py_Meter).
 - Intended for use with [Home Assistant](https://github.com/home-assistant/home-assistant.io) but applicable to any system which can use MQTT.
