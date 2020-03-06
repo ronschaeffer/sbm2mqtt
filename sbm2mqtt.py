@@ -16,6 +16,9 @@ import paho.mqtt.client as mqtt
 # Import configuration variables from sbm2mqtt_config.py file - Must be in the same folder as this script
 from sbm2mqtt_config import mqtt_host, mqtt_port, mqtt_timeout, mqtt_client, mqtt_user, mqtt_pass, mqtt_topic
 
+# SwitchBot UUID - See https://github.com/OpenWonderLabs/python-host/wiki/Meter-BLE-open-API
+service_uuid = 'cba20d00-224d-11e6-9fb8-0002a5d5c51b'
+
 class ScanDelegate( DefaultDelegate ):
   def __init__( self ):
     DefaultDelegate.__init__( self )
@@ -47,7 +50,7 @@ class ScanDelegate( DefaultDelegate ):
             print("  Battery: "+str(battery)+"%")
 
             # MQTT publish as JSON
-            msg_data = '{"time":\"' + time + '\","temperature":' + str(temperature) + ',"humidity":' + str(humidity) + ',"battery":' + str(battery) +'}'
+            msg_data = '{"time":\"' + time + '\","temperature":' + str(temperature) + ',"humidity":' + str(humidity) + ',"battery":' + str(battery) + ',"temperature scale:"' + temp_scale +'}'
             print("\n  Publishing MQTT payload to "+mqtt_topic+mac+" ...\n\n    "+msg_data)
             mqttc = mqtt.Client(mqtt_client)
             mqttc.username_pw_set(mqtt_user, mqtt_pass)
