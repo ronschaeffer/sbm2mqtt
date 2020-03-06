@@ -33,7 +33,7 @@ I suggest that you don't first follow OpenWonderLabs' dependency installation re
 sbm2mqtt works like this:
 
 - Scan for Bluetooth Low Energy devices, looking for SwitchBot Meters.
-- For each SwitchBot Meter, grab the MAC address, temperature, humidity and battery level from the BLE advertisement. (sbm2mqtt does not connect to the Meters, so it should not have any impact on battery life.)
+- For each SwitchBot Meter, grab the MAC address, temperature, humidity and battery level from the BLE advertisement.
 - Publish the temperature, humidity and battery level for each SwitchBot Meter separately to an MQTT topic that includes the MAC address.
 - Print the values to the terminal (if not running in the background) and save them to a log.
 - If you also configure Home Assistant with MQTT sensors for the sbm2mqtt MQTT topics, HA updates the states of those sensors with every new MQTT message.
