@@ -1,6 +1,6 @@
 # sbm2mqtt
 
-Grab SwitchBot Meter data over BLE and publish to MQTT topic for Home Assistant, etc.
+Grab SwitchBot Meter data from Bluetooth Low Energy advertisements and publish them to an MQTT topic for use with Home Assistant, etc.
 
 - Based in part on [OpenWonderLabs/python-host](https://github.com/OpenWonderLabs/python-host), [Switchbot_Py_Meter](https://github.com/bbostock/Switchbot_Py_Meter) and [switchbot-meter.py](https://qiita.com/warpzone/items/11ec9bef21f5b965bce3).
 - Intended for use with [Home Assistant](https://github.com/home-assistant/home-assistant.io) but applicable to any system which can use MQTT.
@@ -18,13 +18,25 @@ Tested with:
 
 **TL;DR** Start with a fresh install of Raspbian Buster Lite. Don't install the dependencies recommended by OpenWonderLabs for python-host.
 
-OpenWonderLabs published the open API for SwitchBot Meters in late 2019. [bbostock](https://github.com/bbostock) here and   [warpzone](https://qiita.com/warpzone) on Qiita posted the first Python scripts I saw to take advantage of it. bbostock's also featured MQTT publishing for integration with Home Assistant.
+OpenWonderLabs published the open API for SwitchBot Meters in late 2019. [bbostock](https://github.com/bbostock) here and   [warpzone](https://qiita.com/warpzone) on Qiita posted the first Python scripts I saw to taking advantage of it. bbostock's script also featured MQTT publishing for integration with Home Assistant.
 
-For reasons that I still can't figure out, neither script worked for me on a Pi 4 or Pi Zero W. The firmware on my Meters was updated from 2.4 to 2.5 as I was starting to work with them. That apparently caused the device model names (WOSensorTH) to not be visible when doing a BLE scan, although the MACs still were. It initially appeared that the firmware upgrade may have been the cause for my Meters failing to work with the scripts.
+For reasons that I still can't figure out, neither script worked for me on a Pi 4 or Pi Zero W. The firmware on my Meters was updated from 2.4 to 2.5 as I was starting to work with them. That caused the device model names (WOSensorTH) to not be visible when doing a BLE scan, although the MACs still were. It initially appeared that the firmware upgrade may have been the cause for my Meters failing to work with the scripts.
 
-When OpenWonderLabs [posted](https://github.com/OpenWonderLabs/python-host/blob/master/switchbot_meter_py3.py) an new script that worked with my Meters, I used that a starting point to create my own, resulting in sbm2mqtty. I tested that with my original Pi Zero W set up as well as a Pi 3B+ with fresh Raspbian Buster Lite. bbostock's and warpzone's scripts run successfully on the 3B+, as well.
+When OpenWonderLabs [posted](https://github.com/OpenWonderLabs/python-host/blob/master/switchbot_meter_py3.py) a new script that worked with my Meters, I used it as a starting point to create my own, resulting in sbm2mqtty. I tested that with my original Pi Zero W set up as well as on a Pi 3B+ with fresh Raspbian Buster Lite. bbostock's and warpzone's scripts run successfully on the 3B+, as well.
 
-So, my best guess is that the problem was something with the environments on the Pi4 and Pi Zero W caused by OpenWonderLabs somewhat complicated dependency installation recommendations for python-host. 
+So, my best guess is that the original failure with bbostock's and warpzone's scripts was something to due with the environments on the Pi4 and Pi Zero W caused by OpenWonderLabs' somewhat complicated dependency installation recommendations for python-host.
+
+I suggest that you don't first follow OpenWonderLabs' dependency installation recommendations for python-host. They are not necessary for sbm2mqtt and may have been the cause of my earlier failures.
+
+### Operation
+
+sbm2mqtt works like this:
+
+- Scan for Bluetooth Low Energy devices, looking for SwitchBot Meters.
+- For each SwitchBot Meter, grab the MAC address, temperature, humidity and battery level from the BLE advertisement. (sbm2mqtt does not connect to the Meters, so it should not have any impact on battery life.)
+- Publish the temperature, humidity and battery level for each SwitchBot Meter separately to an MQTT topic that includes the MAC address.
+- Print the values to the terminal (if not running in the background) and save them to a log.
+- If you also configure Home Assistant with MQTT sensors for the sbm2mqtt MQTT topics, HA updates the states of those sensors with every new MQTT message.
 
 ### Installation
 
@@ -40,13 +52,63 @@ $ sudo pip3 install paho-mqtt
 
 Create a directory called `switchbot` containing the files:
 
-`sbm2mqtt.py` 
+```
+sbm2mqtt.py
+sbm2mqtt_config.py
+```
 
-`sbm2mqtt_config.py`
+You don't need to edit `sbm2mqtt.py` . Edit `sbm2mqtt_config.py` with your settings for:
 
+```python
+# MQTT Settings
+mqtt_host = 'xxx.xxx.xxx.xxx'
+mqtt_port = xxxx
+mqtt_timeout = 30
+mqtt_client = 'switchbot_meter_checker'
+mqtt_user = 'xxxxxx'
+mqtt_pass = 'xxxxxx'
+mqtt_topic = 'switchbot_meter/'
+```
 
+Execute sqm2mqtt in the terminal, and note the MAC addresses of any SwitchBot meters it finds.
 
+If you want to integrate with Home Assistant, add three ```sensor:``` entries to ```configuration.yaml``` for each Meter, as follows:
 
+```yaml
+sensor:
+- platform: mqtt
+  name: 'name_of_this_meter_temperature'
+  state_topic: 'switchbot_meter/xx:xx:xx:xx:xx:xx' # MAC address of this meter
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: '°C'
+- platform: mqtt
+  name_of_this_meter_humidity'
+  state_topic: 'switchbot_meter/xx:xx:xx:xx:xx:xx' # MAC address of this meter
+  value_template: '{{ value_json.humidity }}'
+  unit_of_measurement: '%'
+  icon: mdi:water-percent
+- platform: mqtt
+  name: 'name_of_this_meter_temperature'
+  state_topic: 'switchbot_meter/xx:xx:xx:xx:xx:xx' # MAC address of this meter
+  value_template: '{{ value_json.battery }}'
+  unit_of_measurement: '%'
+  icon: mdi:battery
+```
 
+If you have a split configuration, paste in the contents of the ```sensors.yaml``` file to your sensor configuration file and edit appropriately.
 
+To run sbm2mqtt in the background automatically every five minutes and also log what it's doing (Thanks, bbostock.):
 
+```bash
+$ sudo nano /etc/crontab
+```
+
+ and add:
+
+```
+*/5 *   * * *   pi      sudo python3 /home/pi/switchbot/sbm2mqtt.py >> /home/pi/switchbot/sbm2mqtt.log 2>&1
+```
+
+ If you have a different user name or used a different directory structure, edit accordingly.
+
+That's it. You should be good to go.
