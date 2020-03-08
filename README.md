@@ -97,14 +97,6 @@ sensor:
 
 If you have a split configuration, paste in the contents of the ```sensors.yaml``` file to your sensor configuration file and edit appropriately.
 
-### Use
-
-To execute sbm2mqtt in the `switchbot` directory:
-
-```bash
-$ sudo python3 sbm2mqtt.py
-```
-
 To run sbm2mqtt in the background automatically every five minutes and also log what it's doing (Thanks, bbostock.):
 
 ```bash
@@ -117,8 +109,6 @@ $ sudo nano /etc/crontab
 */5 *   * * *   pi      sudo python3 /home/pi/switchbot/sbm2mqtt.py >> /home/pi/switchbot/sbm2mqtt.log 2>&1
 ```
 
-If you have a different user name or used a different directory structure, edit accordingly.
-
-
+ If you have a different user name or used a different directory structure, edit accordingly.
 
 That's it. You should be good to go.

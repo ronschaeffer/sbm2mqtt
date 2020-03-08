@@ -84,7 +84,7 @@ class ScanDelegate(DefaultDelegate):
                             + str(humidity)
                             + ',"battery":'
                             + str(battery)
-                            + ',"temperature_scale":"'
+                            + ',"temperature scale":"'
                             + temp_scale
                             + '"}'
                         )
