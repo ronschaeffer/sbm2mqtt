@@ -12,7 +12,7 @@ from bluepy.btle import Scanner, DefaultDelegate
 import datetime
 import binascii
 import paho.mqtt.client as mqtt
-
+ 
 # Import configuration variables from sbm2mqtt_config.py file - Must be in the same folder as this script
 from sbm2mqtt_config import (
     mqtt_host,
