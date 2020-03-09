@@ -80,7 +80,7 @@ sensor:
   name: 'name_of_this_meter_temperature'
   state_topic: 'switchbot_meter/xx:xx:xx:xx:xx:xx' # MAC address of this meter
   value_template: '{{ value_json.temperature }}'
-  unit_of_measurement: '°C'
+  unit_of_measurement: '°C' # Change to '°F' as appropriate
 - platform: mqtt
   name_of_this_meter_humidity'
   state_topic: 'switchbot_meter/xx:xx:xx:xx:xx:xx' # MAC address of this meter
