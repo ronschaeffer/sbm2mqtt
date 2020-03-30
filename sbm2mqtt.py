@@ -1,5 +1,6 @@
 
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 #
 # sbm2mqtt.py https://github.com/ronschaeffer/sbm2mqtt
 #
@@ -70,7 +71,7 @@ class ScanDelegate(DefaultDelegate):
 
                         # Print info to terminal
                         print("\n" + mac + " @ " + str(time))
-                        print("  Temp: " + str(temperature) + "\xb0" + temp_scale)
+                        print("  Temp: " + str(temperature) + "° " + temp_scale)
                         print("  Humidity: " + str(humidity) + "%")
                         print("  Battery: " + str(battery) + "%")
 
