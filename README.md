@@ -119,6 +119,29 @@ $ sudo nano /etc/crontab
 
 If you have a different user name or used a different directory structure, edit accordingly.
 
+Your output should look something like this:
+```
+Scanning for SwitchBot Meters...
 
+f5:49:7c:bb:xx:46 @ 2020-03-30 14:26:02
+  Temp: 21.0° C
+  Humidity: 29%
+  Battery: 100%
+
+  Publishing MQTT payload to switchbot_meter/f5:49:7c:bb:xx:46 ...
+
+    {"time":"2020-03-30 14:26:02","temperature":21.0,"humidity":29,"battery":100,"temperature_scale":"C"}
+
+c9:c7:8d:fb:xx:65 @ 2020-03-30 14:26:05
+  Temp: 69.8° F
+  Humidity: 30%
+  Battery: 100%
+
+  Publishing MQTT payload to switchbot_meter/c9:c7:8d:fb:xx:65 ...
+
+    {"time":"2020-03-30 14:26:05","temperature":69.8,"humidity":30,"battery":100,"temperature_scale":"F"}
+
+Finished.
+```
 
 That's it. You should be good to go.
