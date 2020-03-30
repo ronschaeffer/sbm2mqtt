@@ -82,13 +82,13 @@ sensor:
   value_template: '{{ value_json.temperature }}'
   unit_of_measurement: '°C' # Change to '°F' as appropriate
 - platform: mqtt
-  name_of_this_meter_humidity'
+  name: 'name_of_this_meter_humidity'
   state_topic: 'switchbot_meter/xx:xx:xx:xx:xx:xx' # MAC address of this meter
   value_template: '{{ value_json.humidity }}'
   unit_of_measurement: '%'
   icon: mdi:water-percent
 - platform: mqtt
-  name: 'name_of_this_meter_temperature'
+  name: 'name_of_this_meter_battery'
   state_topic: 'switchbot_meter/xx:xx:xx:xx:xx:xx' # MAC address of this meter
   value_template: '{{ value_json.battery }}'
   unit_of_measurement: '%'
