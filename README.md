@@ -57,7 +57,7 @@ sbm2mqtt.py
 sbm2mqtt_config.py
 ```
 
-You don't need to edit `sbm2mqtt.py` . Edit `sbm2mqtt_config.py` with your settings for:
+You don't need to edit `sbm2mqtt.py`. Edit `sbm2mqtt_config.py` with your settings for:
 
 ```python
 # MQTT Settings
