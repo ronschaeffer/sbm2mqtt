@@ -71,7 +71,7 @@ class ScanDelegate(DefaultDelegate):
 
                         # Print info to terminal
                         print("\n" + mac + " @ " + str(time))
-                        print("  Temp: " + str(temperature) + "° " + temp_scale)
+                        print("  Temp: " + str(temperature) + "\u00B0" + temp_scale)
                         print("  Humidity: " + str(humidity) + "%")
                         print("  Battery: " + str(battery) + "%")
 
