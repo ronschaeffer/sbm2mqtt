@@ -70,7 +70,7 @@ mqtt_pass = 'xxxxxx'
 mqtt_topic = 'switchbot_meter/'
 ```
 
-Execute sqm2mqtt in the terminal, and note the MAC addresses of any SwitchBot meters it finds.
+Execute sbm2mqtt in the terminal, and note the MAC addresses of any SwitchBot meters it finds.
 
 If you want to integrate with Home Assistant, add three ```sensor:``` entries to ```configuration.yaml``` for each Meter, as follows:
 
