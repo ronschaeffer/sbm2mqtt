@@ -2,6 +2,8 @@
 
 Grab SwitchBot Meter data from Bluetooth Low Energy advertisements and publish them to an MQTT topic for use with Home Assistant, etc.
 
+![Doorbell & notifications](image.png?raw=true)
+
 - Based in part on [OpenWonderLabs/python-host](https://github.com/OpenWonderLabs/python-host), [Switchbot_Py_Meter](https://github.com/bbostock/Switchbot_Py_Meter) and [switchbot-meter.py](https://qiita.com/warpzone/items/11ec9bef21f5b965bce3).
 - Intended for use with [Home Assistant](https://github.com/home-assistant/home-assistant.io) but applicable to any system which can use MQTT.
 - Applies to SwitchBot Meter devices with the BLE UUID [cba20d00-224d-11e6-9fb8-0002a5d5c51b](https://github.com/OpenWonderLabs/python-host/wiki/Meter-BLE-open-API). I don't know if all SwitchBot Meter hardware and firmware versions share the same UUID.
