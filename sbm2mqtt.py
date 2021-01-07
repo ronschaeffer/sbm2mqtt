@@ -11,7 +11,8 @@
 from bluepy.btle import Scanner, DefaultDelegate, ScanEntry
 import datetime
 import paho.mqtt.client as mqtt
- 
+import json
+
 # Import configuration variables from sbm2mqtt_config.py file - Must be in the same folder as this script
 from sbm2mqtt_config import (
     mqtt_host,
@@ -69,19 +70,14 @@ class ScanDelegate(DefaultDelegate):
             print("  Battery: " + str(battery) + "%")
 
             # MQTT publish as JSON
-            msg_data = (
-                '{"time":"'
-                + time
-                + '","temperature":'
-                + str(temperature)
-                + ',"humidity":'
-                + str(humidity)
-                + ',"battery":'
-                + str(battery)
-                + ',"temperature_scale":"'
-                + temp_scale
-                + '"}'
-            )
+            msg_data = json.dumps({
+                "time": time,
+                "temperature": temperature,
+                "humidity": humidity,
+                "battery": battery,
+                "temperature_scale": temp_scale,
+                "signal_strength": dev.rssi,
+            })
             print(
                 "\n  Publishing MQTT payload to "
                 + mqtt_topic
