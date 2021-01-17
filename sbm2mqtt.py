@@ -37,7 +37,7 @@ class ScanDelegate(DefaultDelegate):
         # Check for model "T" (54) in 16b service data
         if (
             services and services[0] == service_uuid
-            and service_data and len(service_data) == 8 and service_data[2] == b"T"
+            and service_data and len(service_data) == 8 and service_data[2] == 0x54
         ):
             mac = dev.addr
             binvalue = service_data
