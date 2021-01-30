@@ -3,4 +3,7 @@
 service dbus start
 bluetoothd &
 
-./sbm2mqtt.py
+while true ; do
+	./sbm2mqtt.py
+	sleep $MQTT_INTERVAL || break
+done
