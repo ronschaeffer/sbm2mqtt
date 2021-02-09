@@ -7,6 +7,8 @@
 #   https://github.com/OpenWonderLabs/python-host
 #   https://github.com/bbostock/Switchbot_Py_Meter
 #   https://qiita.com/warpzone/items/11ec9bef21f5b965bce3.
+#
+# Substantial contribution from @shish to simplify scanning and building of JSON
 
 from bluepy.btle import Scanner, DefaultDelegate, ScanEntry
 import datetime
