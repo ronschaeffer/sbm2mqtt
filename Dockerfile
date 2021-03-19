@@ -8,6 +8,9 @@ ENV \
     MQTT_PORT=1883 \
     MQTT_USER=xxxxxx \
     MQTT_PASS=xxxxxx \
-    MQTT_INTERVAL=300
+    MQTT_CLIENT=sbm2mqtt \
+    MQTT_TOPIC=switchbot_meter \
+    REPORTING_INTERVAL=300
+      # in seconds
 ENTRYPOINT sh docker_entrypoint.sh
 COPY . .
