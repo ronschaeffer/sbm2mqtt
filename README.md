@@ -2,6 +2,8 @@
 
 Grab SwitchBot Meter data from Bluetooth Low Energy advertisements and publish them to an MQTT topic for use with Home Assistant, etc.
 
+19 MAR 21: Added Docker option. Will update the README shortly
+
 ![Doorbell & notifications](image.png?raw=true)
 
 - Based in part on [OpenWonderLabs/python-host](https://github.com/OpenWonderLabs/python-host), [Switchbot_Py_Meter](https://github.com/bbostock/Switchbot_Py_Meter) and [switchbot-meter.py](https://qiita.com/warpzone/items/11ec9bef21f5b965bce3).
