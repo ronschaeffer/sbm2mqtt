@@ -68,10 +68,10 @@ You don't need to edit `sbm2mqtt.py`. Edit `sbm2mqtt_config.py` with your settin
 mqtt_host = 'xxx.xxx.xxx.xxx'
 mqtt_port = xxxx
 mqtt_timeout = 30
-mqtt_client = 'switchbot_meter_checker'
+mqtt_client = 'smn2mqtt'
 mqtt_user = 'xxxxxx'
 mqtt_pass = 'xxxxxx'
-mqtt_topic = 'switchbot_meter/'
+mqtt_topic = 'switchbot_meter'
 ```
 
 Execute sbm2mqtt in the terminal, and note the MAC addresses of any SwitchBot meters it finds.
