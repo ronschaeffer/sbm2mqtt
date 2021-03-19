@@ -5,5 +5,5 @@ bluetoothd &
 
 while true ; do
 	./sbm2mqtt.py
-	sleep $MQTT_INTERVAL || break
+	sleep $REPORTING_INTERVAL || break
 done
