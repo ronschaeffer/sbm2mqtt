@@ -90,7 +90,7 @@ class ScanDelegate(DefaultDelegate):
             mqttc = mqtt.Client(mqtt_client)
             mqttc.username_pw_set(mqtt_user, mqtt_pass)
             mqttc.connect(mqtt_host, mqtt_port)
-            mqttc.publish(mqtt_topic + mac, msg_data, 1)
+            mqttc.publish(mqtt_topic + "\" + mac, msg_data, 1)
 
 
 def main():
