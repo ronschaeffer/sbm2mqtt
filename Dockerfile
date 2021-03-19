@@ -1,5 +1,5 @@
 # docker build . -t sbm2mqtt
-# docker run --rm --net=host --privileged -it -e MQTT_HOST=192.168.1.10 -e MQTT_USER=bob -e MQTT_PASS=waffles sbm2mqtt
+# docker run --rm --net=host --privileged -it -e MQTT_HOST=xxx.xxx.xxx.xxx -e MQTT_PORT=xxxx -e MQTT_USER=xxxxxx -e MQTT_PASS=xxxxxx sbm2mqtt
 FROM python:3.7
 RUN apt-get update && apt-get install -y bluez bluetooth
 RUN pip install bluepy paho-mqtt
