@@ -10,4 +10,5 @@ services:
       - MQTT_USER=user
       - MQTT_PASS=pass
       - REPORTING_INTERVAL=60
+      - TZ=Europe/London
     restart: unless-stopped
