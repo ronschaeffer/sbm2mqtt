@@ -48,7 +48,7 @@ docker run --rm --net=host --privileged -it -e MQTT_HOST=127.0.0.1 -e MQTT_PORT=
 Or, edit the `sbm2mqtt_config.py` file with your own information and just use:
 
 ```
-docker run --rm --net=host --privileged -it
+docker run --rm --net=host --privileged -it sbm2mqtt
 ```
 
 Available environmental variables
