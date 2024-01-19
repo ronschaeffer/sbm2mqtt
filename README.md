@@ -13,7 +13,7 @@ Tested with:
 - Pi Zero W, Pi 3B+ and Pi 4B running Raspbian Buster and Python 3.7.3
 - SwitchBot Meters with firmware 2.5 & 2.6
 - Local MQTT broker
-- Home Assistant versions 0.106 to 2021.3 (optional) 
+- Home Assistant versions 0.106 to 2022.6 (optional) 
 
 Some users have reported success with Ubuntu systems. If you use sbm2mqtt on a system other than a Pi running Raspbian/Raspberry Pi OS, please raise an issue with details or edit this README file and create a pull request. 
 
@@ -143,31 +143,32 @@ c9:c7:8d:fb:xx:65 @ 2020-03-30 14:26:05
 Finished.
 ```
 
-### Integration with Home Assistant
+### Integration with Home Assistant *
 
 Execute sbm2mqtt and note the MAC addresses of any SwitchBot meters it finds.
 
 Add three ```sensor:``` entries to ```configuration.yaml``` for each Meter, as follows:
 
 ```yaml
-sensor:
-- platform: mqtt
-  name: 'name_of_this_meter_temperature'
-  state_topic: 'switchbot_meter/xx:xx:xx:xx:xx:xx' # MAC address of this meter
-  value_template: '{{ value_json.temperature }}'
-  unit_of_measurement: '°C' # Change to '°F' as appropriate
-- platform: mqtt
-  name: 'name_of_this_meter_humidity'
-  state_topic: 'switchbot_meter/xx:xx:xx:xx:xx:xx' # MAC address of this meter
-  value_template: '{{ value_json.humidity }}'
-  unit_of_measurement: '%'
-  icon: mdi:water-percent
-- platform: mqtt
-  name: 'name_of_this_meter_battery'
-  state_topic: 'switchbot_meter/xx:xx:xx:xx:xx:xx' # MAC address of this meter
-  value_template: '{{ value_json.battery }}'
-  unit_of_measurement: '%'
-  icon: mdi:battery
+mqtt:
+  sensor:
+    - name: 'name_of_this_meter_temperature'
+      state_topic: 'switchbot_meter/xx:xx:xx:xx:xx:xx' # MAC address of this meter
+      value_template: '{{ value_json.temperature }}'
+      unit_of_measurement: '°C' # Change to '°F' as appropriate
+    - name: 'name_of_this_meter_humidity'
+      state_topic: 'switchbot_meter/xx:xx:xx:xx:xx:xx' # MAC address of this meter
+      value_template: '{{ value_json.humidity }}'
+      unit_of_measurement: '%'
+      icon: mdi:water-percent
+    - name: 'name_of_this_meter_battery'
+      state_topic: 'switchbot_meter/xx:xx:xx:xx:xx:xx' # MAC address of this meter
+      value_template: '{{ value_json.battery }}'
+      unit_of_measurement: '%'
+      icon: mdi:battery
+
 ```
 
 If you have a split configuration, paste in the contents of the ```sensors.yaml``` file to your sensor configuration file and edit appropriately.
+
+*This yaml snippet was updated to use the [updated Home assistant 2022.6 the configuration](https://www.home-assistant.io/blog/2022/06/01/release-20226/#breaking-changes)
