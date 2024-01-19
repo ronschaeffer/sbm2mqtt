@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Use environement variables or replace with your own values
+# Use environment variables or replace with your own values
 # Environment variables override contents of this file
 # Place in same folder as sbm2mqtt.py
 
