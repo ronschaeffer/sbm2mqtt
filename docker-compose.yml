@@ -1,0 +1,14 @@
+version: '3'
+services:
+  sbm2mqtt:
+    container_name: sbm2mqtt
+    network_mode: host
+    image: sbm2mqtt
+    privileged: true
+    environment:
+      - MQTT_HOST=ip
+      - MQTT_USER=user
+      - MQTT_PASS=pass
+      - REPORTING_INTERVAL=60
+      - TZ=Europe/London
+    restart: unless-stopped
