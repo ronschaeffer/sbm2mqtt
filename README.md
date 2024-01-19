@@ -1,4 +1,4 @@
-#UPDATE: I'm no longer maintaining this project, because the official Home Assistant Switchbot integration now supports meters. See https://www.home-assistant.io/integrations/switchbot/.
+# UPDATE: I'm no longer maintaining this project, because the official Home Assistant Switchbot integration now supports meters. See https://www.home-assistant.io/integrations/switchbot/.
 
 # sbm2mqtt
 
